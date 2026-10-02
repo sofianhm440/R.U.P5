@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <title>DarkMode</title>
+</head>
+
+<body>
+    <div class="container">
+        <nav>
+            <a onclick="reRender()" id="home" class="home">HOME</a>
+            <a onclick="darkMode()" id="mode">MODE 1</a>
+            <a onclick="coolMode()" id="cool">MODE 2</a> 
+            <a onclick="dangerMode()" id="danger">MODE 3</a>
+        </nav>
+        <h1>HELLOOO WORLDDD</h1>
+        <P class="info" id="info"></P>
+    </div>
+
+    <!-- initializing function script -->
+    <script>
+        let body = document.body;
+        let info = document.getElementById("info");
+        let mode = document.getElementById("mode");
+        let home = document.getElementById("home");
+        let cool = document.getElementById("cool");
+        let danger = document.getElementById("danger");
+
+        const darkLimit = 6;
+        let darkCounter = 0;
+        let darkRemainingLeft;
+        home.style.display = "none";
+
+        function darkMode() {
+            if (darkRemainingLeft == 1) {
+                info.textContent = "FITUR DARKMODE TELAH HABIS";
+                mode.style.display = "none";
+                cool.style.display = "none";
+                danger.style.display = "none";
+                home.style.display = "block";
+                home.textContent = "RESTART";
+                return;
+            }
+
+            darkCounter += 1;
+            darkRemainingLeft = darkLimit - darkCounter;
+
+            //  render ke info element
+            info.textContent = `Darkmode digunakan sebanyak ${darkCounter}x, tersisa ${darkRemainingLeft}x`
+
+            body.classList.toggle('dark'); 
+
+             if (body.classList.contains('dark')) {
+             mode.textContent = "LIGHT MODE";
+             } else {
+                 mode.textContent = "DARK MODE";
+             }
+        }
+
+        function coolMode() {
+            if (darkRemainingLeft == 1) {
+                info.textContent = "FITUR COOLMODE TELAH HABIS";
+                cool.style.display = "none";
+                mode.style.display = "none";
+                danger.style.display = "none";
+                home.style.display = "block";
+                home.textContent = "RESTART";
+                return;
+            }
+
+            darkCounter += 1;
+            darkRemainingLeft = darkLimit - darkCounter;
+
+            info.textContent = `Coolmode digunakan sebanyak ${darkCounter}x, tersisa ${darkRemainingLeft}x`
+
+            body.classList.toggle('dark1');
+
+            if (body.classList.contains(`dark1`)) {
+                cool.textContent = "LIGHT MODE";
+            } else {
+                cool.textContent = "COOL MODE";
+            }
+        }
+
+        function dangerMode() {
+            if(darkRemainingLeft == 1) {
+                info.textContent = "FITUR WARNING MODE TELAH HABIS";
+                danger.style.display = "none";
+                mode.style.display = "none";
+                cool.style.display = "none";
+                home.style.display = "block";
+                home.textContent = "RESTART";
+                return;
+            }
+
+            darkCounter += 1;
+            darkRemainingLeft = darkLimit - darkCounter;
+
+            info.textContent = `Warn mode digunakan sebanyak ${darkCounter}x, tersisa ${darkRemainingLeft}x`
+
+            body.classList.toggle('dark2');
+
+            if (body.classList.contains (`dark2`)) {
+                danger.textContent = "LIGHT MODE";
+            } else {
+                danger.textContent = "WARN MODE";
+            }
+
+        }
+
+        function reRender() {
+            location.reload()
+        }
+
+    </script>
+</body>
+
+</html>
